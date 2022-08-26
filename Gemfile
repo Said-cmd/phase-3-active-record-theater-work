@@ -1,7 +1,32 @@
 source "https://rubygems.org"
-gem "pry"
-gem "require_all"
-gem "activerecord", "~> 5.2"
+
+# An object-relational mapper
+# https://guides.rubyonrails.org/active_record_basics.html
+gem "activerecord", "~> 6.1"
+
+# Configures common Rake tasks for working with Active Record
+# https://github.com/sinatra-activerecord/sinatra-activerecord
 gem "sinatra-activerecord"
-gem "sqlite3"
+
+# Run common tasks from the command line
+# https://github.com/ruby/rake
 gem "rake"
+
+# Provides functionality to interact with a SQLite3 database
+# https://github.com/sparklemotion/sqlite3-ruby
+gem "sqlite3", "~> 1.5.0.rc1"
+
+# Require all files in a folder
+# https://github.com/jarmo/require_all
+gem "require_all"
+
+# These gems will only be used when we are running the application locally
+gem "pry", "~> 0.14.1"
+
+# These gems will only be used when we are running tests
+group :test do
+  gem "database_cleaner"
+  gem "rspec"
+end
+
+gem "faker", "~> 2.22.0"
