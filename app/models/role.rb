@@ -2,15 +2,20 @@ class Role < ActiveRecord::Base
     has_many :auditions
 
     def actors
-        Role.auditions.actors
+        actors = []
+        self.auditions.map do |a|
+            a.actor
+        end
     end
 
     def locations
-        Role.auditions.locations
+        self.auditions.map do |a|
+            a.location
+          end
     end
 
     def lead
-        lead_actor = Role.auditions.where(hired: true).first
+        lead_actor = self.auditions.where(hired: true).first
         if lead_actor == nil
             "no actor has been hired for this role"
         else
@@ -19,7 +24,7 @@ class Role < ActiveRecord::Base
     end
 
     def understudy
-        understudy_actor = Role.auditions.where(hired: true).second
+        understudy_actor = self.auditions.where(hired: true).second
         if understudy_actor == nil
             "no actor has been hired for understudy for this role"
         else
